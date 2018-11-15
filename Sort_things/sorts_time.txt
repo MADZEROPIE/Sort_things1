@@ -1,0 +1,23 @@
+
+1000 
+Insertion sort (linear) 		 2
+Insertion sort (binary) 		 1
+Merge sort 		 3
+Shell sort 		 14
+Selection sort 		 3
+Quick sort 		 1
+Shaker sort 		 14
+Bubble sort 		 16
+
+10000 
+Bubble sort 		 906
+Shaker sort 		 817
+Quick sort 		 7
+Selection sort 		 145
+Shell sort 		 800
+Merge sort 		 23
+Insertion sort (binary) 		 71
+Insertion sort (linear) 		 125
+
+1000 
+Merge sort 		 2
