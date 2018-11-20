@@ -3,14 +3,14 @@
 #include <stdlib.h>
 #include <time.h>
 //#include "sorts1.h"
-#define Q 11
+//#define Q 12
 
 
-int choice(char menu[Q][25], int n) {
+int choice(char menu[][25], int n) {
 	int k = -1, i;
 	for (i = 0; i < n; i++)
 		printf("%s (%d)\n", menu[i], i);
-	while (k < 0 || k>10) {
+	while (k < 0 || k>n - 1) {
 		printf("Please choose wisely: ");
 		scanf_s("%d", &k);
 	}
@@ -29,52 +29,12 @@ void swap(int a[], int x, int y) {
 	a[x] = a[y];
 	a[y] = temp;
 }
-
-struct sorts_time
-{
-	int time_sort;
-	char name[30];
-};*/
+*/
 
 void swap(int &a, int &b) {
 	int t = a;
 	a = b;
 	b = t;
-}
-/*
-int choice(char menu[Q][25],int n) {
-	int k=-1,i;
-	for (i = 0; i < n; i++)
-		printf("%s (%d)\n", menu[i],i);
-        while (k < 0 || k>10) {
-		printf("Please choose wisely: ");
-		scanf_s("%d", &k);
-	}
-	return k;	
-}*/
-
-int input(int arr[], int len) {
-	int i;
-	printf("Press 0 for default settings or any other number for choose new settings ");
-	scanf_s("%d", &i);
-	if (i == 0)
-		return len;
-	len = -1;
-	while (len < 0 || len>7777777) {
-		printf("Enter number of elements: ");
-		scanf_s("%d", &len);
-	}
-	//arr = (int *)realloc(arr, n*sizeof(int));
-	arr = (int *)malloc(len*sizeof(int));
-	printf("Press 0 if you wanna create random array or any other number if you wanna enter it mannualy ");
-	scanf_s("%d", &i);
-	if (i == 0)
-		create_r_arr(arr, len);
-	else
-		for (int j = 0; j < len;j++)
-			scanf_s("%d", &arr[j]);
-	return len;
-	
 }
 
 void create_r_arr(int arr[], int n) {
@@ -90,7 +50,7 @@ void print_arr(int arr[], int len) {
 void bubble_sort(int arr[], int n) {
 	int flag = 1, i;
 	while (flag) {
-		for (i = 0, flag = 0; i<n - 1; i++)
+		for (i = 0, flag = 0; i < n - 1; i++)
 			if (arr[i] > arr[i + 1]) {
 				flag = 1;
 				swap(arr[i], arr[i + 1]);
@@ -257,7 +217,7 @@ void insertion_sort(int arr[], int len) {
 	}
 }
 
-void insertion_sort(int len,int arr[]) {
+void insertion_sort(int len, int arr[]) {
 	int k, s, r;
 	for (k = 1; k < len; k++) {
 		r = arr[k];
@@ -327,39 +287,39 @@ void radix_sort(int a[], int n) {
 }
 */
 
-void iter_merge(int* a,int *b,int *c,int na,int nb) {
-	int i=0,j=0,k=0;
+void iter_merge(int* a, int *b, int *c, int na, int nb) {
+	int i = 0, j = 0, k = 0;
 	while (i < na && j < nb) {
 		if (a[i] <= b[j])
 			c[k++] = a[i++];
 		else
 			c[k++] = b[j++];
 	}
-	while (i < na) 
+	while (i < na)
 		c[k++] = a[i++];
 
-	while (j < nb) 
+	while (j < nb)
 		c[k++] = b[j++];
 
 }
 
 void merge_sort(int *arr, int n) {
-	int* t_arr = (int*)malloc(n*sizeof(int));
-	int *src=arr, *dst=t_arr;
+	int* t_arr = (int*)malloc(n * sizeof(int));
+	int *src = arr, *dst = t_arr;
 	int len = 1;
 	int len2;
-	for (; len < n; len * 2) {
-		int i=0;
-		for (len2=len; i < n-len;i++){
-			if (i+len2+len>n)
-				len2=n-len-i;
-			iter_merge(src+i,src+i+len,dst+i,len,len2);
+	for (; len < n; len *= 2) {
+		int i = 0;
+		for (len2 = len; i < n - len; i += (len + len2)) {
+			if (i + len2 + len > n)
+				len2 = n - len - i;
+			iter_merge(src + i, src + i + len, dst + i, len, len2);
 		}
-		if(i<n)
-			copy_arr(src+i,dst+i,n-i);
-		int *tmp=src;src=dst;dst=tmp;
+		if (i < n)
+			copy_arr(src + i, dst + i, n - i);
+		int *tmp = src; src = dst; dst = tmp;
 	}
-	if (src!=t_arr)
-		copy_arr(t_arr,arr,n);
+	if (src == t_arr)
+		copy_arr(t_arr, arr, n);
 	free(t_arr);
 }
