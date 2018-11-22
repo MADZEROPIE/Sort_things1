@@ -111,7 +111,7 @@ void selection_sort(int arr[], int len) {
 }
 
 void shell_sort(int arr[], int n)
-{
+{/*
 	for (int gap = n / 2; gap > 0; gap /= 2)
 	{
 		for (int i = gap; i < n; i++)
@@ -122,7 +122,17 @@ void shell_sort(int arr[], int n)
 				arr[j] = arr[j - gap];
 			arr[j] = temp;
 		}
-	}
+	}*/
+	int gap = 1;
+	int i,j;
+	while (gap < n/3) 
+		gap = 3 * gap + 1;
+	while (gap > 0) {
+		for (i = gap; i < n; i++)
+			for (j = i; j > 0 && arr[j] < arr[j - gap]; j -= gap)
+				swap(arr[j], arr[j - gap]);
+		gap -= gap / 3;
+	}	
 }
 
 void copy_arr(int c_arr[], int t_arr[], int n) {

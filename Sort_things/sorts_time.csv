@@ -15,3 +15,26 @@
 20000;Shell sort;3240
 20000;Bubble sort;3564
 20000;Insertion sort (binary);263
+2000,Shell sort, 30 
+2000,Shell sort, 30 
+2000,Bubble sort, 31 
+2000,Shell sort, 30 
+2000,Bubble sort, 31 
+10000,Merge sort (down-top), 1 
+10000,Shell sort, 781 
+45000,Shell sort, 2109 
+45000,Shell sort, 2109 
+45000,Shaker sort, 2112 
+45000,Shell sort, 2109 
+45000,Shaker sort, 2112 
+45000,Bubble sort, 3043 
+45000,Shell sort, 2109 
+45000,Shaker sort, 2112 
+45000,Bubble sort, 3043 
+45000,Merge sort (down-top), 3 
+450,Bubble sort, 1 
+450,Shell sort, 0 
+450,Merge sort (down-top), 0 
+450,Bubble sort, 1 
+450,Shell sort, 0 
+450,Merge sort (down-top), 0 
