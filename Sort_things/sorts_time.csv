@@ -1,0 +1,17 @@
+20000;Quick sort;1
+20000;Shaker sort;405
+20000;Bubble sort;571
+20000;Quick sort;1
+20000;Merge sort;4
+20000;Insertion sort (binary);41
+20000;Insertion sort (linear);72
+20000;Merge sort (down-top);1
+20000;Selection sort;572
+20000;Shell sort;400
+20000;Quick sort;1
+20000;Shell sort;406
+1000000;Merge sort;221
+1000000;Merge sort (down-top);73
+20000;Shell sort;3240
+20000;Bubble sort;3564
+20000;Insertion sort (binary);263

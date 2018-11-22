@@ -30,7 +30,7 @@ int main()
 	srand(time(0));//опнйпсрйю яв╗рвхйю ояебдняксвюимшу вхяек
 	create_r_arr(c_arr, N);//гюонкмъел люяяхб яксвюимшлх вхякюлх
 	FILE* file;//янгдюмхе тюикю б йнрнпнл асдср упюмхрэяъ пегскэрюрш янрхпнбнй
-	fopen_s(&file, "sorts_time.cvs", "a");
+	fopen_s(&file, "sorts_time.csv", "a");
 	if (file != NULL) {
 		while (k != 11) {
 			k = choice(menu, Q);
