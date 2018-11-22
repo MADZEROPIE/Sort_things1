@@ -4,51 +4,22 @@
 #include "sorts1.h"
 #include <string.h>
 #include <locale.h>
-//#include "source.cpp"
 
 
 
-#define N 200000
-#define K 12
-#define Q 12
-#define NUM 20
+#define N 200000 //йнкхвеярбн щкелемрнб люяяхбю
+#define K 12 // йнкхвеярбн пегскэрюрнб янпрхпнбнй янупюмъелшу б оюлърх
+#define Q 12 // йнкхвеярбн осмйрнб лемч
+#define NUM 20 //йнкхвеярбн щкелемрнб люяяхбю бшбндъыхуяъ мю щйпюм
 
 struct sorts_time
 {
-	int time_sort;
+	int time_sort; 
 	char name[30];
 	int num;
 	int sorted_arr[NUM];
 };
 
-
-
-int NN;
-
-int* input(int *arr, int len) {
-	int i;
-	printf("Press 0 for default settings or any other number for choose new settings ");
-	scanf_s("%d", &i);
-	if (i == 0)
-		return arr;
-	len = -1;
-	while (len < 0 || len>7777777) {
-		printf("Enter number of elements: ");
-		scanf_s("%d", &len);
-	}
-	NN = len;
-	//arr = (int *)realloc(arr, n*sizeof(int));
-	arr = (int *)malloc(len * sizeof(int));
-	printf("Press 0 if you wanna create random array or any other number if you wanna enter it mannualy ");
-	scanf_s("%d", &i);
-	if (i == 0 || len > 10000)
-		create_r_arr(arr, len);
-	else
-		for (int j = 0; j < len; j++)
-			scanf_s("%d", &arr[j]);
-	return arr;
-
-}
 
 int main()
 {
@@ -59,27 +30,19 @@ int main()
 	char menu[Q][25] = { "Input","Output","Bubble sort","Shaker sort","Quick sort","Selection sort","Shell sort","Merge sort","Insertion sort (binary)","Insertion sort (linear)","Merge sort (down-top)","Exit" };
 	int k = 0, flag1 = 0;
 	sorts_time sorts_arr[K] = { {0," ",0,0} };
-	//int time_arr[Q];
 	int s_time, e_time, count = 0;
 	srand(time(0));
 	create_r_arr(c_arr, N);
 	FILE* file;
 	fopen_s(&file, "sorts_time.cvs", "a");
-	/* if (file != NULL) {
-		 fprintf(file, "\n%d \n", N);
-		 for (int i = 0; i < K; i++)
-			 fprintf(file, "%s \t\t %d\n", sorts_arr[i].name, sorts_arr[i].time_sort);
-				 }
- */
 	while (k != 11) {
 		k = choice(menu, Q);
 
 		switch (k)
 		{
 		case 0:
-			c_arr = input(c_arr, N);
+			c_arr = input(c_arr, &n);
 			free(arr);
-			n = NN;
 			arr = (int *)malloc(n * sizeof(c_arr[0]));
 			copy_arr(c_arr, arr, n);
 			break;
@@ -87,11 +50,9 @@ int main()
 		case 1:
 			printf("Default array :\n");
 			print_arr(c_arr, NUM);
-			//printf("\nSorted array :\n");
-			//print_arr(arr,NUM);
 			printf("\n\n");
 			if (file != NULL) {
-				//fprintf(file, "\n%d \n", n);
+				fprintf(file, "\sep= \n");
 				if (flag1)
 					for (int i = count; i < K; i++) {
 						fprintf(file, "%d,%s,%d \n", sorts_arr[i].num, sorts_arr[i].name, sorts_arr[i].time_sort);

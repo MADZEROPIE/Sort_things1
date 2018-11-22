@@ -2,9 +2,29 @@
 #include "sorts1.h"
 #include <stdlib.h>
 #include <time.h>
-//#include "sorts1.h"
-//#define Q 12
 
+
+int* input(int *arr, int *len) {
+	int i;
+	printf("Press 0 for default settings or any other number for choose new settings ");
+	scanf_s("%d", &i);
+	if (i == 0)
+		return arr;
+	*len = -1;
+	while (*len < 0 || *len>7777777) {
+		printf("Enter number of elements: ");
+		scanf_s("%d", len);
+	}
+	arr = (int *)realloc(arr, *len * sizeof(int));
+	printf("Press 0 if you wanna create random array or any other number if you wanna enter it mannualy ");
+	scanf_s("%d", &i);
+	if (i == 0)
+		create_r_arr(arr, *len);
+	else
+		for (int j = 0; j < *len; j++)
+			scanf_s("%d", &arr[j]);
+	return arr;
+}
 
 int choice(char menu[][25], int n) {
 	int k = -1, i;
@@ -17,19 +37,6 @@ int choice(char menu[][25], int n) {
 	return k;
 }
 
-
-/*
-void swap(int *a, int *b) {
-	int temp = *a;
-	*a = *b;
-	*b = temp;
-}
-void swap(int a[], int x, int y) {
-	int temp = a[x];
-	a[x] = a[y];
-	a[y] = temp;
-}
-*/
 
 void swap(int &a, int &b) {
 	int t = a;
@@ -59,19 +66,6 @@ void bubble_sort(int arr[], int n) {
 	}
 }
 
-/*
-void stone_sort(int arr[], int n) {
-	int flag = 1, i, k = 0;
-	while (flag) {
-		for (i = n - 1, flag = 0; i > k; i--)
-			if (arr[i] < arr[i - 1]) {
-				flag = 1;
-				swap(arr, i, i - 1);
-			}
-		k++;
-	}
-}*/
-
 void shaker_sort(int arr[], int len) {
 	int i, j, flag = 1;
 	for (i = 0; i < len / 2; i++) {
@@ -91,16 +85,6 @@ void shaker_sort(int arr[], int len) {
 	}
 }
 
-/*
-void insertion_sort(int arr[], int len) {
-	int i, j;
-	for (i = 0; i < len; i++) {
-		j = i;
-		for (; j > 0 && arr[j] < arr[j - 1]; j--)
-			swap(arr, j - 1, j);
-	}
-}
-*/
 void quick_sort(int arr[], int left, int right) {
 	if (left < right) {
 		int k = left;
@@ -226,66 +210,6 @@ void insertion_sort(int len, int arr[]) {
 		arr[s] = r;
 	}
 }
-
-/*
-void heap(int a[], int i, int n) {
-	int max = i;
-	while (true) {
-		int child = 2 * i + 1;
-		if (child < n && a[max] < a[child])
-			max = child;
-		child++;
-		if (child < n && a[max] < a[child])
-			max = child;
-		if (max == i)
-			break;
-		else {
-			swap(a, max, i);
-			i = max;
-		}
-	}
-}
-
-void heap_sort(int a[], int n) {
-	for (int i = n / 2; i >= 0; i--)
-		heap(a, i, n);
-	for (int i = n - 1; i > 0; i--) {
-		swap(a, 0, i);
-		heap(a, 0, i);
-
-	}
-}
-
-int get_max(int a[], int n) {
-	int m = a[0];
-	for (int i = 1; i < n; i++)
-		if (a[i] > m)
-			m = a[i];
-	return m;
-}
-
-void count_sort(int a[], int n, int num) {
-	int *temp_arr = (int *)malloc(n*sizeof(a[0]));
-	int i;
-	int count[10] = { 0 };
-	for (i = 0; i < n; i++)
-		count[(a[i] / num) % 10]++;
-	for (i = 1; i < 10; i++)
-		count[i] += count[i - 1];
-	for (i = n - 1; i >= 0; i--) {
-		temp_arr[count[(a[i] / num) % 10] - 1] = a[i];
-		count[(a[i] / num) % 10]--;
-	}
-	for (i = 0; i < n; i++)
-		a[i] = temp_arr[i];
-}
-
-void radix_sort(int a[], int n) {
-	int m = get_max(a, n);
-	for (int num = 1; m / num > 0; num *= 10)
-		count_sort(a, n, num);
-}
-*/
 
 void iter_merge(int* a, int *b, int *c, int na, int nb) {
 	int i = 0, j = 0, k = 0;
