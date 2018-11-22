@@ -15,7 +15,8 @@ int* input(int *arr, int *len) {
 		printf("Enter number of elements: ");
 		scanf_s("%d", len);
 	}
-	arr = (int *)realloc(arr, *len * sizeof(int));
+	free(arr);
+	arr = (int *)malloc(*len * sizeof(int));
 	printf("Press 0 if you wanna create random array or any other number if you wanna enter it mannualy ");
 	scanf_s("%d", &i);
 	if (i == 0)
@@ -132,8 +133,8 @@ void copy_arr(int c_arr[], int t_arr[], int n) {
 void merge(int arr[], int l, int mid, int r) {
 	int n2 = r - mid;
 	int n1 = mid - l + 1;
-	int *t_arr_1 = (int *)malloc(n1 * sizeof(arr[0]));
-	int *t_arr_2 = (int *)malloc(n2 * sizeof(arr[0]));
+	int *t_arr_1 = (int *)malloc(n1 * sizeof(int));
+	int *t_arr_2 = (int *)malloc(n2 * sizeof(int));
 	for (int i = 0; i < n1; i++)
 		t_arr_1[i] = arr[l + i];
 	for (int j = 0; j < n2; j++)
@@ -146,14 +147,11 @@ void merge(int arr[], int l, int mid, int r) {
 			arr[k] = t_arr_2[j++];
 		k++;
 	}
-	while (i < n1) {
-		arr[k] = t_arr_1[i];
-		k++; i++;
-	}
-	while (j < n2) {
-		arr[k] = t_arr_2[j];
-		k++; j++;
-	}
+	while (i < n1) 
+		arr[k++] = t_arr_1[i++];	
+	while (j < n2) 
+		arr[k++] = t_arr_2[j++];
+
 	free(t_arr_1);
 	free(t_arr_2);
 }
@@ -224,7 +222,6 @@ void iter_merge(int* a, int *b, int *c, int na, int nb) {
 
 	while (j < nb)
 		c[k++] = b[j++];
-
 }
 
 void merge_sort(int *arr, int n) {
