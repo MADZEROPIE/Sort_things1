@@ -23,7 +23,7 @@ int main()
 {
 	setlocale(LC_CTYPE, "Russian");
 	int n = N;//йнкхвеярбн щкелемрнб люяяхбю (хглемъелне)
-	int *c_arr = (int*)malloc(N * sizeof(int));//янгдюмхе дхмюлхвеяйнцн люяяхбю (люяяхб он слнквюмхч)
+	int *C_ARR = (int*)malloc(N * sizeof(int));//янгдюмхе дхмюлхвеяйнцн люяяхбю (люяяхб он слнквюмхч)
 	int *arr = (int*)malloc(N * sizeof(int));//янгдюмхе дхмюлхвеяйнцн люяяхбю (люяяхб дкъ янпрхпнбйх)
 	//char menu[Q][25] = { "Input","Output","Bubble sort","Shaker sort","Quick sort","Selection sort","Shell sort","Merge sort","Insertion sort (binary)","Insertion sort (linear)","Merge sort (down-top)","Exit" };
 	char menu[Q][33] = { "бБНД","бШБНД","яНПРХПНБЙЮ ОСГШПЭЙНЛ","ьЕИЙЕПМЮЪ ЯНПРХПНБЙЮ","аШЯРПЮЪ ЯНПРХПНБЙЮ","яНПРХПНБЙЮ БШАНПНЛ","яНПРХПНБЙЮ ЯКХЪМХЕЛ (МХЯУНДЪЫЮЪ)","яНПРХПНБЙЮ ЯКХЪМХЕЛ (БНЯУНДЪЫЮЪ)","яНПРХПНБЙЮ БЯРЮБЙЮЛХ (КХМЕИМЮЪ)","яНПРХПНБЙЮ БЯРЮБЙЮЛХ (АХМЮПМЮЪ)","бШУНД" };
@@ -31,25 +31,25 @@ int main()
 	sorts_time sorts_arr[K] = { {0," ",0,0} };
 	int s_time, e_time, count = 0;
 	srand(time(0));//опнйпсрйю яв╗рвхйю ояебдняксвюимшу вхяек
-	create_r_arr(c_arr, N);//гюонкмъел люяяхб яксвюимшлх вхякюлх
+	create_r_arr(C_ARR, N);//гюонкмъел люяяхб яксвюимшлх вхякюлх
 	FILE* file;//янгдюмхе тюикю б йнрнпнл асдср упюмхрэяъ пегскэрюрш янрхпнбнй
 	fopen_s(&file, "sorts_time.csv", "w");// нрйпшбюел тюик дкъ гюохях
 	if (file != NULL) {
-		while (k != 11) {
+		while (k != 10) {
 			k = choice(menu, Q);
 			switch (k)
 			{
 			case 0:
-				c_arr = input(c_arr, &n);
+				C_ARR = input(C_ARR, &n);
 				free(arr);
-				arr = (int *)malloc(n * sizeof(c_arr[0]));
-				copy_arr(c_arr, arr, n);
+				arr = (int *)malloc(n * sizeof(C_ARR[0]));
+				copy_arr(C_ARR, arr, n);
 				break;
 
 			case 1:
 				//printf("Default array :\n");
 				printf("хЯУНДМШИ ЛЮЯЯХБ :\n");
-				print_arr(c_arr, NUM);
+				print_arr(C_ARR, NUM);
 				printf("\n\n");
 				//fprintf(file, "\sep=, \n");
 				if (flag1) {
@@ -73,7 +73,7 @@ int main()
 				break;
 
 			case 2:
-				copy_arr(c_arr, arr, n);//йнохпнбюмхе щк-рнб хг нямнбмнцн люяяхбю б "янпрхпнбнвмши" люяяхб
+				copy_arr(C_ARR, arr, n);//йнохпнбюмхе щк-рнб хг нямнбмнцн люяяхбю б "янпрхпнбнвмши" люяяхб
 				s_time = clock();//бпелъ пюанрш опнцпюллш дн янпрхпнбйх
 				bubble_sort(arr, n);//бшгнб янпрхпнбйх
 				e_time = clock();//бпелъ пюанрш опнцпюллш оняке янпрхпнбйх
@@ -82,7 +82,7 @@ int main()
 				break;
 
 			case 3:
-				copy_arr(c_arr, arr, n);
+				copy_arr(C_ARR, arr, n);
 				s_time = clock();
 				shaker_sort(arr, n);
 				e_time = clock();
@@ -91,7 +91,7 @@ int main()
 				break;
 
 			case 4:
-				copy_arr(c_arr, arr, n);
+				copy_arr(C_ARR, arr, n);
 				s_time = clock();
 				quick_sort(arr, 0, n);
 				e_time = clock();
@@ -100,7 +100,7 @@ int main()
 				break;
 
 			case 5:
-				copy_arr(c_arr, arr, n);
+				copy_arr(C_ARR, arr, n);
 				s_time = clock();
 				selection_sort(arr, n);
 				e_time = clock();
@@ -109,7 +109,7 @@ int main()
 				break;
 /*
 			case 6:
-				copy_arr(c_arr, arr, n);
+				copy_arr(C_ARR, arr, n);
 				s_time = clock();
 				shaker_sort(arr, n);
 				e_time = clock();
@@ -118,7 +118,7 @@ int main()
 				break;
 */
 			case 6:
-				copy_arr(c_arr, arr, n);
+				copy_arr(C_ARR, arr, n);
 				s_time = clock();
 				merge_sort(arr, 0, n - 1);
 				e_time = clock();
@@ -127,7 +127,7 @@ int main()
 				break;
 			
 			case 7:
-				copy_arr(c_arr, arr, n);
+				copy_arr(C_ARR, arr, n);
 				s_time = clock();
 				merge_sort(arr, n);
 				e_time = clock();
@@ -136,7 +136,7 @@ int main()
 				break;
 
 			case 8:
-				copy_arr(c_arr, arr, n);
+				copy_arr(C_ARR, arr, n);
 				s_time = clock();
 				insertion_sort(n, arr);
 				e_time = clock();
@@ -145,7 +145,7 @@ int main()
 				break;
 
 			case 9:
-				copy_arr(c_arr, arr, n);
+				copy_arr(C_ARR, arr, n);
 				s_time = clock();
 				insertion_sort(arr, n);
 				e_time = clock();
@@ -160,7 +160,7 @@ int main()
 			}
 		}
 
-	free(c_arr);//нябнанфдюел оюлърэ нр люяяхбнб
+	free(C_ARR);//нябнанфдюел оюлърэ нр люяяхбнб
 	free(arr);
 	fclose(file);//гюйпшбюел тюик
 	}

@@ -6,7 +6,7 @@ void shift(int arr[], int s, int k);
 void merge_sort(int arr[], int left, int right);
 void merge(int arr[], int l, int mid, int r);
 void copy_arr(int c_arr[], int t_arr[], int n);
-void shell_sort(int arr[], int n);
+//void shell_sort(int arr[], int n);
 void selection_sort(int arr[], int len);
 void quick_sort(int arr[], int left, int right);
 void insertion_sort(int arr[], int len);
