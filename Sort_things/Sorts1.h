@@ -15,7 +15,7 @@ void shaker_sort(int arr[], int len);
 void bubble_sort(int arr[], int n);
 void print_arr(int arr[], int len);
 void swap(int &a, int &b);
-int choice(char menu[][25], int n);
+int choice(char menu[][33], int n);
 int *input(int *arr, int *len);
 void create_r_arr(int arr[], int n);
 void merge_sort(int *arr, int n);

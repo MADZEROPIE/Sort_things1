@@ -27,7 +27,7 @@ int* input(int *arr, int *len) {
 	return arr;
 }
 
-int choice(char menu[][25], int n) {
+int choice(char menu[][33], int n) {
 	int k = -1, i;
 	for (i = 0; i < n; i++)
 		printf("%s (%d)\n", menu[i], i);
@@ -109,7 +109,7 @@ void selection_sort(int arr[], int len) {
 		swap(arr[i], arr[k]);
 	}
 }
-
+/*
 void shell_sort(int arr[], int n)
 {
 	for (int gap = n / 2; gap > 0; gap /= 2)
@@ -124,7 +124,7 @@ void shell_sort(int arr[], int n)
 		}
 	}
 }
-
+*/
 void copy_arr(int c_arr[], int t_arr[], int n) {
 	for (int i = 0; i < n; i++)
 		t_arr[i] = c_arr[i];
