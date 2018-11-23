@@ -111,7 +111,7 @@ void selection_sort(int arr[], int len) {
 }
 /*
 void shell_sort(int arr[], int n)
-{
+{/*
 	for (int gap = n / 2; gap > 0; gap /= 2)
 	{
 		for (int i = gap; i < n; i++)
