@@ -6,24 +6,24 @@
 
 int* input(int *arr, int *len) {
 	int i;
-	printf("Press 0 for default settings or any other number for choose new settings ");
+	printf("Введите 0 для настроек по умолчанию или любое другое число,если хотите изменить настройки ");
 	scanf_s("%d", &i);
-	if (i == 0)
+	if (!i)
 		return arr;
 	*len = -1;
-	while (*len < 0 || *len>7777777) {
-		printf("Enter number of elements: ");
+	while (*len < 1 || *len>7777777) {
+		printf("\nВведите количество элементов: ");
 		scanf_s("%d", len);
 	}
 	free(arr);
 	arr = (int *)malloc(*len * sizeof(int));
-	printf("Press 0 if you wanna create random array or any other number if you wanna enter it mannualy ");
-	scanf_s("%d", &i);
-	if (i == 0)
-		create_r_arr(arr, *len);
-	else
+	//printf("Введите 0 чтобы создать рандомный массив или любое другое число,если хотите ввести его вручную ");
+	//scanf_s("%d", &i);
+	//if (!i)
+	create_r_arr(arr, *len);
+	/*else
 		for (int j = 0; j < *len; j++)
-			scanf_s("%d", &arr[j]);
+			scanf_s("%d", &arr[j]);*/
 	return arr;
 }
 
@@ -32,17 +32,17 @@ int choice(char menu[][33], int n) {
 	for (i = 0; i < n; i++)
 		printf("%s (%d)\n", menu[i], i);
 	while (k < 0 || k>n - 1) {
-		printf("Please choose wisely: ");
+		printf("Выберете пункт меню: ");
 		scanf_s("%d", &k);
 	}
 	return k;
 }
 
 
-void swap(int &a, int &b) {
-	int t = a;
-	a = b;
-	b = t;
+void swap(int *a, int *b) {
+	int t = *a;
+	*a = *b;
+	*b = t;
 }
 
 void create_r_arr(int arr[], int n) {
@@ -61,7 +61,7 @@ void bubble_sort(int arr[], int n) {
 		for (i = 0, flag = 0; i < n - 1; i++)
 			if (arr[i] > arr[i + 1]) {
 				flag = 1;
-				swap(arr[i], arr[i + 1]);
+				swap(arr+i, arr+i + 1);
 			}
 		n--;
 	}
@@ -73,12 +73,12 @@ void shaker_sort(int arr[], int len) {
 		flag = 0;
 		for (j = i; j < len - 1 - i; j++)
 			if (arr[j] > arr[j + 1]) {
-				swap(arr[j], arr[j + 1]);
+				swap(arr+j, arr+j + 1);
 				flag = 1;
 			}
 		for (j = len - 2 - i; j > i; j--)
 			if (arr[j] < arr[j - 1]) {
-				swap(arr[j], arr[j - 1]);
+				swap(arr+j, arr+j - 1);
 				flag = 1;
 			}
 		if (!flag)
@@ -90,9 +90,11 @@ void quick_sort(int arr[], int left, int right) {
 	if (left < right) {
 		int k = left;
 		for (int i = left + 1; i < right; i++)
-			if (arr[i] < arr[left])
-				swap(arr[i], arr[++k]);
-		swap(arr[left], arr[k]);
+			if (arr[i] < arr[left]) {
+				k++;
+				swap(arr + i, arr + k);
+			}
+		swap(arr+left, arr+k);
 		quick_sort(arr, left, k);
 		quick_sort(arr, k + 1, right);
 	}
@@ -106,7 +108,7 @@ void selection_sort(int arr[], int len) {
 				k = j;
 				flag = 1;
 			}
-		swap(arr[i], arr[k]);
+		swap(arr+i, arr+k);
 	}
 }
 /*
@@ -123,6 +125,7 @@ void shell_sort(int arr[], int n)
 			arr[j] = temp;
 		}
 	}
+	//Вариант 2
 	int gap = 1;
 	int i,j;
 	while (gap < n/3) 
@@ -135,6 +138,7 @@ void shell_sort(int arr[], int n)
 	}	
 }
 */
+
 void copy_arr(int c_arr[], int t_arr[], int n) {
 	for (int i = 0; i < n; i++)
 		t_arr[i] = c_arr[i];
@@ -199,7 +203,7 @@ int bin_search(int arr[], int k) {
 	return left;
 }
 
-void insertion_sort(int arr[], int len) {
+void bin_insertion_sort(int arr[], int len) {
 	int k, s, r;
 	for (k = 1; k < len; k++) {
 		r = arr[k];
@@ -209,7 +213,7 @@ void insertion_sort(int arr[], int len) {
 	}
 }
 
-void insertion_sort(int len, int arr[]) {
+void lin_insertion_sort(int len, int arr[]) {
 	int k, s, r;
 	for (k = 1; k < len; k++) {
 		r = arr[k];
@@ -234,7 +238,7 @@ void iter_merge(int* a, int *b, int *c, int na, int nb) {
 		c[k++] = b[j++];
 }
 
-void merge_sort(int *arr, int n) {
+void it_merge_sort(int *arr, int n) {
 	int* t_arr = (int*)malloc(n * sizeof(int));
 	int *src = arr, *dst = t_arr;
 	int len = 1;

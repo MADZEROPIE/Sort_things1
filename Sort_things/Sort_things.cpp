@@ -10,18 +10,18 @@
 #define Q 11 // КОЛИЧЕСТВО ПУНКТОВ МЕНЮ
 #define NUM 20 //КОЛИЧЕСТВО ЭЛЕМЕНТОВ МАССИВА ВЫВОДЯЩИХСЯ НА ЭКРАН
 
-struct sorts_time
+typedef struct //СТРУКТУРА ДАННЫХ ДЛЯ ХРАНЕНИЯ РЕЗУДЬТАТОВ СОРТИРОВКИ
 {
-	int time_sort; 
-	char name[33];
-	int num;
-	int sorted_arr[NUM];
-};
+	int time_sort; //ВРЕМЯ СОРТИРОВКИ
+	char *name; //УКАЗАТЕЛЬ НА НАЧАЛО СТРОКИ С НАЗВАНИЕМ СОРТИРОВКИ
+	int num;//КОЛИЧЕСТВО ЭЛЕМЕНТОВ
+	int sorted_arr[NUM]; //ФРАГМЕНТ ОТСОРТИРОВАННОГО МАССИВА
+} sorts_time;
 
 
 int main()
 {
-	setlocale(LC_CTYPE, "Russian");
+	setlocale(LC_CTYPE, "Russian");//ЛОКАЛИЗАЦИЯ
 	int n = N;//КОЛИЧЕСТВО ЭЛЕМЕНТОВ МАССИВА (ИЗМЕНЯЕМОЕ)
 	int *C_ARR = (int*)malloc(N * sizeof(int));//СОЗДАНИЕ ДИНАМИЧЕСКОГО МАССИВА (МАССИВ ПО УМОЛЧАНИЮ)
 	int *arr = (int*)malloc(N * sizeof(int));//СОЗДАНИЕ ДИНАМИЧЕСКОГО МАССИВА (МАССИВ ДЛЯ СОРТИРОВКИ)
@@ -41,9 +41,8 @@ int main()
 			{
 			case 0:
 				C_ARR = input(C_ARR, &n);
-				free(arr);
-				arr = (int *)malloc(n * sizeof(C_ARR[0]));
-				copy_arr(C_ARR, arr, n);
+				free(arr);//ОСВОБОЖДАЕМ МАССИВ
+				arr = (int *)malloc(n * sizeof(C_ARR[0]));//ЗАВОДИМ МАССИВ НОВОГО РАЗМЕРА
 				break;
 
 			case 1:
@@ -51,7 +50,7 @@ int main()
 				printf("Исходный массив :\n");
 				print_arr(C_ARR, NUM);
 				printf("\n\n");
-				//fprintf(file, "\sep=, \n");
+				fprintf(file, "\sep=,\nКоличество элементов,Название сортировки,Время\n");
 				if (flag1) {
 					for (int i = count; i < K; i++) {
 						fprintf(file, "%d,%s,%d \n", sorts_arr[i].num, sorts_arr[i].name, sorts_arr[i].time_sort);
@@ -77,7 +76,9 @@ int main()
 				s_time = clock();//ВРЕМЯ РАБОТЫ ПРОГРАММЫ ДО СОРТИРОВКИ
 				bubble_sort(arr, n);//ВЫЗОВ СОРТИРОВКИ
 				e_time = clock();//ВРЕМЯ РАБОТЫ ПРОГРАММЫ ПОСЛЕ СОРТИРОВКИ
-				sorts_arr[count] = { e_time - s_time,"Сортировка пузырьком",n };//ЗАПИСЬ РЕЗУЛЬТАТОВ
+				sorts_arr[count].time_sort =  e_time - s_time;//ЗАПИСЬ РЕЗУЛЬТАТОВ
+				sorts_arr[count].name = menu[k];
+				sorts_arr[count].num = n;
 				copy_arr(arr, sorts_arr[count++].sorted_arr, NUM);
 				break;
 
@@ -86,7 +87,9 @@ int main()
 				s_time = clock();
 				shaker_sort(arr, n);
 				e_time = clock();
-				sorts_arr[count] = { e_time - s_time,"Шейкерная сортировка",n };
+				sorts_arr[count].time_sort = e_time - s_time;//ЗАПИСЬ РЕЗУЛЬТАТОВ
+				sorts_arr[count].name = menu[k];
+				sorts_arr[count].num = n;
 				copy_arr(arr, sorts_arr[count++].sorted_arr, NUM);
 				break;
 
@@ -95,7 +98,9 @@ int main()
 				s_time = clock();
 				quick_sort(arr, 0, n);
 				e_time = clock();
-				sorts_arr[count] = { e_time - s_time,"Быстрая сортировка",n };
+				sorts_arr[count].time_sort = e_time - s_time;//ЗАПИСЬ РЕЗУЛЬТАТОВ
+				sorts_arr[count].name = menu[k];
+				sorts_arr[count].num = n;
 				copy_arr(arr, sorts_arr[count++].sorted_arr, NUM);
 				break;
 
@@ -104,7 +109,9 @@ int main()
 				s_time = clock();
 				selection_sort(arr, n);
 				e_time = clock();
-				sorts_arr[count] = { e_time - s_time,"Сортировка выбором",n };
+				sorts_arr[count].time_sort = e_time - s_time;//ЗАПИСЬ РЕЗУЛЬТАТОВ
+				sorts_arr[count].name = menu[k];
+				sorts_arr[count].num = n;
 				copy_arr(arr, sorts_arr[count++].sorted_arr, NUM);
 				break;
 /*
@@ -122,34 +129,42 @@ int main()
 				s_time = clock();
 				merge_sort(arr, 0, n - 1);
 				e_time = clock();
-				sorts_arr[count] = { e_time - s_time,"Сортировка слиянием (нисходящая)",n };
+				sorts_arr[count].time_sort = e_time - s_time;//ЗАПИСЬ РЕЗУЛЬТАТОВ
+				sorts_arr[count].name = menu[k];
+				sorts_arr[count].num = n;
 				copy_arr(arr, sorts_arr[count++].sorted_arr, NUM);
 				break;
 			
 			case 7:
 				copy_arr(C_ARR, arr, n);
 				s_time = clock();
-				merge_sort(arr, n);
+				it_merge_sort(arr, n);
 				e_time = clock();
-				sorts_arr[count] = { e_time - s_time,"Сортировка слиянием (восходящая)",n };
+				sorts_arr[count].time_sort = e_time - s_time;//ЗАПИСЬ РЕЗУЛЬТАТОВ
+				sorts_arr[count].name = menu[k];
+				sorts_arr[count].num = n;
 				copy_arr(arr, sorts_arr[count++].sorted_arr, NUM);
 				break;
 
 			case 8:
 				copy_arr(C_ARR, arr, n);
 				s_time = clock();
-				insertion_sort(n, arr);
+				lin_insertion_sort(n, arr);
 				e_time = clock();
-				sorts_arr[count] = { e_time - s_time,"Сортировка вставками (линейная)",n };
+				sorts_arr[count].time_sort = e_time - s_time;//ЗАПИСЬ РЕЗУЛЬТАТОВ
+				sorts_arr[count].name = menu[k];
+				sorts_arr[count].num = n;
 				copy_arr(arr, sorts_arr[count++].sorted_arr, NUM);
 				break;
 
 			case 9:
 				copy_arr(C_ARR, arr, n);
 				s_time = clock();
-				insertion_sort(arr, n);
+				bin_insertion_sort(arr, n);
 				e_time = clock();
-				sorts_arr[count] = { e_time - s_time,"Сортировка вставками (бинарная)",n };
+				sorts_arr[count].time_sort = e_time - s_time;//ЗАПИСЬ РЕЗУЛЬТАТОВ
+				sorts_arr[count].name = menu[k];
+				sorts_arr[count].num = n;
 				copy_arr(arr, sorts_arr[count++].sorted_arr, NUM);
 				break;
 			}
@@ -159,11 +174,10 @@ int main()
 				flag1 = 1;
 			}
 		}
-
-	free(C_ARR);//ОСВОБОЖДАЕМ ПАМЯТЬ ОТ МАССИВОВ
-	free(arr);
 	fclose(file);//ЗАКРЫВАЕМ ФАЙЛ
 	}
+	free(C_ARR);//ОСВОБОЖДАЕМ ПАМЯТЬ ОТ МАССИВОВ
+	free(arr);
 	return 0;
 }
 
