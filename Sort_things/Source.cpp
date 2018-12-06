@@ -6,10 +6,6 @@
 
 int* input(int *arr, int *len) {
 	int i;
-	printf("¬ведите 0 дл€ настроек по умолчанию или любое другое число,если хотите изменить настройки ");
-	scanf_s("%d", &i);
-	if (!i)
-		return arr;
 	*len = -1;
 	while (*len < 1 || *len>7777777) {
 		printf("¬ведите количество элементов: ");
@@ -80,17 +76,17 @@ void shaker_sort(int arr[], int len) {
 	}
 }
 
-void quick_sort(int arr[], int left, int right) {
-	if (left < right) {
-		int k = left;
-		for (int i = left + 1; i < right; i++)
-			if (arr[i] < arr[left]) {
+void quick_sort(int arr[],int right) {
+	if (right>0) {
+		int k = 0;
+		for (int i = 1; i < right; i++)
+			if (arr[i] < arr[0]) {
 				k++;
 				swap(arr + i, arr + k);
 			}
-		swap(arr+left, arr+k);
-		quick_sort(arr, left, k);
-		quick_sort(arr, k + 1, right);
+		swap(arr, arr+k);
+		quick_sort(arr, k);
+		quick_sort(arr+k+1, right-k-1);
 	}
 }
 
@@ -111,16 +107,17 @@ void copy_arr(int c_arr[], int t_arr[], int n) {
 		t_arr[i] = c_arr[i];
 }
 
-void merge(int arr[], int l, int mid, int r) {
+void merge(int arr[], int r) {
+	int mid = r / 2;
 	int n2 = r - mid;
-	int n1 = mid - l + 1;
+	int n1 = mid + 1;
 	int *t_arr_1 = (int *)malloc(n1 * sizeof(int));
 	int *t_arr_2 = (int *)malloc(n2 * sizeof(int));
 	for (int i = 0; i < n1; i++)
-		t_arr_1[i] = arr[l + i];
+		t_arr_1[i] = arr[i];
 	for (int j = 0; j < n2; j++)
 		t_arr_2[j] = arr[j + mid + 1];
-	int i = 0, j = 0, k = l;
+	int i = 0, j = 0, k = 0;
 	while (i < n1 && j < n2) {
 		if (t_arr_1[i] <= t_arr_2[j])
 			arr[k] = t_arr_1[i++];
@@ -137,12 +134,13 @@ void merge(int arr[], int l, int mid, int r) {
 	free(t_arr_2);
 }
 
-void merge_sort(int arr[], int left, int right) {
-	if (left < right) {
-		int m = left + (right - left) / 2;
-		merge_sort(arr, left, m);
-		merge_sort(arr, m + 1, right);
-		merge(arr, left, m, right);
+void merge_sort(int arr[], int right) {
+	right--;
+	if (right>0) {
+		int m = right / 2;
+		merge_sort(arr, m+1);
+		merge_sort(arr+ m + 1, right-m);
+		merge(arr, right);
 	}
 }
 
@@ -180,7 +178,7 @@ void bin_insertion_sort(int arr[], int len) {
 	}
 }
 
-void lin_insertion_sort(int len, int arr[]) {
+void lin_insertion_sort( int arr[], int len) {
 	int k, s, r;
 	for (k = 1; k < len; k++) {
 		r = arr[k];

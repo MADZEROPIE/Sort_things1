@@ -22,6 +22,7 @@ const int NotUsed = system("color F0");//ÇÀÌÅÍÀ ÖÂÅÒÀ ÊÎÍÑÎËÈ (F - BRIGHT WHITE 
 
 int main()
 {
+	void((*f_arr[Q - 3]))(int*, int) = { bubble_sort,shaker_sort,quick_sort,selection_sort,merge_sort,it_merge_sort,lin_insertion_sort,bin_insertion_sort };//ÑÎÇÄÀÍÈÅ ÌÀÑÑÈÂÀ ÓÊÀÇÀÒÅËÅÉ ÍÀ ÑÎĞÒÈĞÎÂÊÈ
 	setlocale(LC_CTYPE, "Russian");//ËÎÊÀËÈÇÀÖÈß
 	int n = N;//ÊÎËÈ×ÅÑÒÂÎ İËÅÌÅÍÒÎÂ ÌÀÑÑÈÂÀ (ÈÇÌÅÍßÅÌÎÅ)
 	int *C_ARR = (int*)malloc(N * sizeof(int));//ÑÎÇÄÀÍÈÅ ÄÈÍÀÌÈ×ÅÑÊÎÃÎ ÌÀÑÑÈÂÀ (ÌÀÑÑÈÂ ÏÎ ÓÌÎË×ÀÍÈŞ)
@@ -66,96 +67,21 @@ int main()
 					printf("Îòñîğòèğîâàííûé ìàññèâ :\n");
 					print_arr(sorts_arr[i].sorted_arr, NUM);
 					printf("\n\n");
-					}
+				}
 				break;
 
-			case 2:
+			case 10:
+				break;
+
+			default:
 				copy_arr(C_ARR, arr, n);//ÊÎÏÈĞÎÂÀÍÈÅ İË-ÒÎÂ ÈÇ ÎÑÍÎÂÍÎÃÎ ÌÀÑÑÈÂÀ Â "ÑÎĞÒÈĞÎÂÎ×ÍÛÉ" ÌÀÑÑÈÂ
 				s_time = clock();//ÂĞÅÌß ĞÀÁÎÒÛ ÏĞÎÃĞÀÌÌÛ ÄÎ ÑÎĞÒÈĞÎÂÊÈ
-				bubble_sort(arr, n);//ÂÛÇÎÂ ÑÎĞÒÈĞÎÂÊÈ
+				(*f_arr[k - 2])(arr, n);//ÂÛÇÎÂ ÑÎĞÒÈĞÎÂÊÈ
 				e_time = clock();//ÂĞÅÌß ĞÀÁÎÒÛ ÏĞÎÃĞÀÌÌÛ ÏÎÑËÅ ÑÎĞÒÈĞÎÂÊÈ
-				sorts_arr[count].time_sort =  e_time - s_time;//ÇÀÏÈÑÜ ĞÅÇÓËÜÒÀÒÎÂ
-				sorts_arr[count].name = menu[k];
-				sorts_arr[count].num = n;
-				copy_arr(arr, sorts_arr[count++].sorted_arr, NUM);
-				break;
-
-			case 3:
-				copy_arr(C_ARR, arr, n);
-				s_time = clock();
-				shaker_sort(arr, n);
-				e_time = clock();
 				sorts_arr[count].time_sort = e_time - s_time;//ÇÀÏÈÑÜ ĞÅÇÓËÜÒÀÒÎÂ
 				sorts_arr[count].name = menu[k];
 				sorts_arr[count].num = n;
 				copy_arr(arr, sorts_arr[count++].sorted_arr, NUM);
-				break;
-
-			case 4:
-				copy_arr(C_ARR, arr, n);
-				s_time = clock();
-				quick_sort(arr, 0, n);
-				e_time = clock();
-				sorts_arr[count].time_sort = e_time - s_time;//ÇÀÏÈÑÜ ĞÅÇÓËÜÒÀÒÎÂ
-				sorts_arr[count].name = menu[k];
-				sorts_arr[count].num = n;
-				copy_arr(arr, sorts_arr[count++].sorted_arr, NUM);
-				break;
-
-			case 5:
-				copy_arr(C_ARR, arr, n);
-				s_time = clock();
-				selection_sort(arr, n);
-				e_time = clock();
-				sorts_arr[count].time_sort = e_time - s_time;//ÇÀÏÈÑÜ ĞÅÇÓËÜÒÀÒÎÂ
-				sorts_arr[count].name = menu[k];
-				sorts_arr[count].num = n;
-				copy_arr(arr, sorts_arr[count++].sorted_arr, NUM);
-				break;
-
-			case 6:
-				copy_arr(C_ARR, arr, n);
-				s_time = clock();
-				merge_sort(arr, 0, n - 1);
-				e_time = clock();
-				sorts_arr[count].time_sort = e_time - s_time;//ÇÀÏÈÑÜ ĞÅÇÓËÜÒÀÒÎÂ
-				sorts_arr[count].name = menu[k];
-				sorts_arr[count].num = n;
-				copy_arr(arr, sorts_arr[count++].sorted_arr, NUM);
-				break;
-			
-			case 7:
-				copy_arr(C_ARR, arr, n);
-				s_time = clock();
-				it_merge_sort(arr, n);
-				e_time = clock();
-				sorts_arr[count].time_sort = e_time - s_time;//ÇÀÏÈÑÜ ĞÅÇÓËÜÒÀÒÎÂ
-				sorts_arr[count].name = menu[k];
-				sorts_arr[count].num = n;
-				copy_arr(arr, sorts_arr[count++].sorted_arr, NUM);
-				break;
-
-			case 8:
-				copy_arr(C_ARR, arr, n);
-				s_time = clock();
-				lin_insertion_sort(n, arr);
-				e_time = clock();
-				sorts_arr[count].time_sort = e_time - s_time;//ÇÀÏÈÑÜ ĞÅÇÓËÜÒÀÒÎÂ
-				sorts_arr[count].name = menu[k];
-				sorts_arr[count].num = n;
-				copy_arr(arr, sorts_arr[count++].sorted_arr, NUM);
-				break;
-
-			case 9:
-				copy_arr(C_ARR, arr, n);
-				s_time = clock();
-				bin_insertion_sort(arr, n);
-				e_time = clock();
-				sorts_arr[count].time_sort = e_time - s_time;//ÇÀÏÈÑÜ ĞÅÇÓËÜÒÀÒÎÂ
-				sorts_arr[count].name = menu[k];
-				sorts_arr[count].num = n;
-				copy_arr(arr, sorts_arr[count++].sorted_arr, NUM);
-				break;
 			}
 
 			if (count == K) { 
