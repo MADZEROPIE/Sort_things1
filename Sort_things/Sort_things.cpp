@@ -18,6 +18,7 @@ typedef struct //СТРУКТУРА ДАННЫХ ДЛЯ ХРАНЕНИЯ РЕЗУДЬТАТОВ СОРТИРОВКИ
 	int sorted_arr[NUM]; //ФРАГМЕНТ ОТСОРТИРОВАННОГО МАССИВА
 } sorts_time;
 
+const int NotUsed = system("color F0");//ЗАМЕНА ЦВЕТА КОНСОЛИ (F - BRIGHT WHITE BACKGROUD, 0 - BLACK TEXT)
 
 int main()
 {
@@ -25,8 +26,8 @@ int main()
 	int n = N;//КОЛИЧЕСТВО ЭЛЕМЕНТОВ МАССИВА (ИЗМЕНЯЕМОЕ)
 	int *C_ARR = (int*)malloc(N * sizeof(int));//СОЗДАНИЕ ДИНАМИЧЕСКОГО МАССИВА (МАССИВ ПО УМОЛЧАНИЮ)
 	int *arr = (int*)malloc(N * sizeof(int));//СОЗДАНИЕ ДИНАМИЧЕСКОГО МАССИВА (МАССИВ ДЛЯ СОРТИРОВКИ)
-	//char menu[Q][25] = { "Input","Output","Bubble sort","Shaker sort","Quick sort","Selection sort","Shell sort","Merge sort","Insertion sort (binary)","Insertion sort (linear)","Merge sort (down-top)","Exit" };
-	char menu[Q][33] = { "Ввод","Вывод","Сортировка пузырьком","Шейкерная сортировка","Быстрая сортировка","Сортировка выбором","Сортировка слиянием (нисходящая)","Сортировка слиянием (восходящая)","Сортировка вставками (линейная)","Сортировка вставками (бинарная)","Выход" };
+	char menu[Q][33] = { "Ввод","Вывод","Сортировка пузырьком","Шейкерная сортировка","Быстрая сортировка","Сортировка выбором","Сортировка слиянием (нисходящая)",
+		"Сортировка слиянием (восходящая)","Сортировка вставками (линейная)","Сортировка вставками (бинарная)","Выход" };
 	int k = 0, flag1 = 0;
 	sorts_time sorts_arr[K] = { {0," ",0,0} };
 	int s_time, e_time, count = 0;
@@ -46,7 +47,6 @@ int main()
 				break;
 
 			case 1:
-				//printf("Default array :\n");
 				printf("Исходный массив :\n");
 				print_arr(C_ARR, NUM);
 				printf("\n\n");
@@ -55,7 +55,6 @@ int main()
 					for (int i = count; i < K; i++) {
 						fprintf(file, "%d,%s,%d \n", sorts_arr[i].num, sorts_arr[i].name, sorts_arr[i].time_sort);
 						printf("%d\t%s\t %d \n", sorts_arr[i].num, sorts_arr[i].name, sorts_arr[i].time_sort);
-						//printf("Sorted array :\n");
 						printf("Отсортированный массив :\n");
 						print_arr(sorts_arr[i].sorted_arr, NUM);
 						printf("\n\n");
@@ -64,7 +63,6 @@ int main()
 				for (int i = 0; i < count; i++) {
 					fprintf(file, "%d,%s, %d \n", sorts_arr[i].num, sorts_arr[i].name, sorts_arr[i].time_sort);
 					printf("%d\t%s\t %d \n", sorts_arr[i].num, sorts_arr[i].name, sorts_arr[i].time_sort);
-					//printf("Sorted array :\n");
 					printf("Отсортированный массив :\n");
 					print_arr(sorts_arr[i].sorted_arr, NUM);
 					printf("\n\n");
@@ -114,16 +112,7 @@ int main()
 				sorts_arr[count].num = n;
 				copy_arr(arr, sorts_arr[count++].sorted_arr, NUM);
 				break;
-/*
-			case 6:
-				copy_arr(C_ARR, arr, n);
-				s_time = clock();
-				shaker_sort(arr, n);
-				e_time = clock();
-				sorts_arr[count] = { e_time - s_time,"Shell sort",n };
-				copy_arr(arr, sorts_arr[count++].sorted_arr, NUM);
-				break;
-*/
+
 			case 6:
 				copy_arr(C_ARR, arr, n);
 				s_time = clock();

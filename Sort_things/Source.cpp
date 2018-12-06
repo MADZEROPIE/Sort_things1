@@ -12,18 +12,12 @@ int* input(int *arr, int *len) {
 		return arr;
 	*len = -1;
 	while (*len < 1 || *len>7777777) {
-		printf("\nВведите количество элементов: ");
+		printf("Введите количество элементов: ");
 		scanf_s("%d", len);
 	}
 	free(arr);
 	arr = (int *)malloc(*len * sizeof(int));
-	//printf("Введите 0 чтобы создать рандомный массив или любое другое число,если хотите ввести его вручную ");
-	//scanf_s("%d", &i);
-	//if (!i)
 	create_r_arr(arr, *len);
-	/*else
-		for (int j = 0; j < *len; j++)
-			scanf_s("%d", &arr[j]);*/
 	return arr;
 }
 
@@ -32,7 +26,7 @@ int choice(char menu[][33], int n) {
 	for (i = 0; i < n; i++)
 		printf("%s (%d)\n", menu[i], i);
 	while (k < 0 || k>n - 1) {
-		printf("Выберете пункт меню: ");
+		printf("Выберите пункт меню: ");
 		scanf_s("%d", &k);
 	}
 	return k;
@@ -61,7 +55,7 @@ void bubble_sort(int arr[], int n) {
 		for (i = 0, flag = 0; i < n - 1; i++)
 			if (arr[i] > arr[i + 1]) {
 				flag = 1;
-				swap(arr+i, arr+i + 1);
+				swap(arr+i, arr+i+1);
 			}
 		n--;
 	}
@@ -111,33 +105,6 @@ void selection_sort(int arr[], int len) {
 		swap(arr+i, arr+k);
 	}
 }
-/*
-void shell_sort(int arr[], int n)
-{/*
-	for (int gap = n / 2; gap > 0; gap /= 2)
-	{
-		for (int i = gap; i < n; i++)
-		{
-			int temp = arr[i];
-			int j;
-			for (j = i; j >= gap && arr[j - gap] > temp; j -= gap)
-				arr[j] = arr[j - gap];
-			arr[j] = temp;
-		}
-	}
-	//Вариант 2
-	int gap = 1;
-	int i,j;
-	while (gap < n/3) 
-		gap = 3 * gap + 1;
-	while (gap > 0) {
-		for (i = gap; i < n; i++)
-			for (j = i; j > 0 && arr[j] < arr[j - gap]; j -= gap)
-				swap(arr[j], arr[j - gap]);
-		gap -= gap / 3;
-	}	
-}
-*/
 
 void copy_arr(int c_arr[], int t_arr[], int n) {
 	for (int i = 0; i < n; i++)
